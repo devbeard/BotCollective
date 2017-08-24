@@ -1,0 +1,41 @@
+﻿@using BirthdayBot.Core.Models
+@model PersonEntity
+
+@{
+    ViewBag.Title = "CREATE";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Opprett ny</h2>
+
+@using (Html.BeginForm("Create", "BirthdayWeb", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Birthday)
+        @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SlackUserName)
+        @Html.TextBoxFor(model => model.SlackUserName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender)
+        @Html.TextBoxFor(model => model.Gender, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Active)
+        @Html.CheckBoxFor(model => model.Active, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" name="save" value="Save" />
+        <input type="submit" name="cancel" value="Cancel" />
+    </div>
+}

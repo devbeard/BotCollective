@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BirthdayBot.Core.Models.PersonEntity>
+
+@{
+    ViewBag.Title = "Birthday List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Success != null && (ViewBag.Success as bool?) != null)
+{
+    var b = ViewBag.Success as bool?;
+    if (b != null && b.Value)
+    {
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.Message</strong>
+        </div>
+    }
+    else if (b != null)
+    {
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@ViewBag.Message</strong>
+        </div>
+    }
+}
+
+<h2>Birthday List</h2>
+
+@Html.ActionLink("Legg til ny...", "Create", "BirthdayWeb", null, null)
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>SlackUser</th>
+            <th>Birthday</th>
+            <th>Active</th>
+            <th>Last Congratulated</th>            
+        </tr>
+
+        @foreach (var person in Model)
+        {
+            <tr class="person">
+                <td>
+                    @Html.ActionLink(person.Name, "Edit", "BirthdayWeb", new { person.RowKey }, null)
+                </td>
+                <td>@person.SlackUserName</td>
+                <td>@person.Birthday</td>
+                
+                @if (person.Active)
+                {
+                    <td class="person-active">@person.Active</td>
+                }
+                else
+                {
+                    <td class="person-inactive">@person.Active</td>
+                }
+
+                <td>@person.LastCongratulation</td>                
+            </tr>
+        }
+
+    </table>
+</div>
